@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView android:id="@+id/stockDetailName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chart"
+        android:textSize="25sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"/>
+
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="3">
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:layout_weight="2" android:orientation="vertical">
+
+            <TextView android:id="@+id/stockVal1"
+                 style="@style/stockValues" />
+
+            <TextView android:id="@+id/stockVal2"
+                style="@style/stockValues" />
+
+            <TextView android:id="@+id/stockVal3"
+                style="@style/stockValues" />
+
+            <TextView android:id="@+id/stockVal4"
+                style="@style/stockValues" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
