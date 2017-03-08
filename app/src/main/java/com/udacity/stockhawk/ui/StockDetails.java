@@ -61,7 +61,7 @@ public class StockDetails extends AppCompatActivity {
 
         Intent intent = getIntent();
         String symbol = intent.getStringExtra("symbol");
-        stockName.setText("Historical data chart for "+ symbol);
+        stockName.setText(getString(R.string.HistoricalDataFor)+ symbol);
 
         ContentResolver contentResolver = getContentResolver();
         Uri uri = Contract.Quote.URI.buildUpon().appendPath(symbol).build();
@@ -71,9 +71,9 @@ public class StockDetails extends AppCompatActivity {
         cursor.moveToFirst();
 
         String history = cursor.getString(Contract.Quote.POSITION_HISTORY);
-        stockVal1.setText("Current Price: "+cursor.getString(Contract.Quote.POSITION_PRICE)+" $");
-        stockVal2.setText("Percentage Change: "+cursor.getString(Contract.Quote.POSITION_PERCENTAGE_CHANGE)+" %");
-        stockVal3.setText("Absolute Change: "+cursor.getString(Contract.Quote.POSITION_ABSOLUTE_CHANGE));
+        stockVal1.setText(getString(R.string.CurrentPrice)+cursor.getString(Contract.Quote.POSITION_PRICE)+" $");
+        stockVal2.setText(getString(R.string.PercentageChange)+cursor.getString(Contract.Quote.POSITION_PERCENTAGE_CHANGE)+" %");
+        stockVal3.setText(getString(R.string.AbsoluteChange)+cursor.getString(Contract.Quote.POSITION_ABSOLUTE_CHANGE));
 
         //stockVal4.setText("Price: "+cursor.getString(Contract.Quote.POSITION_));
 
@@ -97,7 +97,7 @@ public class StockDetails extends AppCompatActivity {
 
         Collections.reverse(entries);
 
-        LineDataSet dataset = new LineDataSet(entries,"Price");
+        LineDataSet dataset = new LineDataSet(entries,getString(R.string.Price));
 
         dataset.setCircleColor(Color.RED);
         dataset.setCircleColorHole(Color.GREEN);
@@ -120,11 +120,11 @@ public class StockDetails extends AppCompatActivity {
         yAxisRight.setTextColor(Color.WHITE);
         yAxisRight.setValueFormatter(new CurrencyFormatter());
 
-        dataset.setLabel("Historical stock price for " + symbol);
+        dataset.setLabel(getString(R.string.HistoricalPrice) + symbol);
         Legend legend = chart.getLegend();
         legend.setTextColor(Color.WHITE);
         Description description = chart.getDescription();
-        description.setText("2 years historical data for "+symbol+", stock each point represents one week");
+        description.setText(getString(R.string.TwoYearsHistorical)+symbol+getString(R.string.EachPointRespresentsAWeek));
         description.setTextSize(11);
         description.setYOffset(5);
         description.setXOffset(8);

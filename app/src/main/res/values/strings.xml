@@ -31,5 +31,13 @@
     <string name="no_internet_error_on_unit_change">There is not internet connection at the moment, please make sure you are connected and try again</string>
     <string name="chart">Chart</string>
     <string name="add_stock_button">Add Stock Button</string>
+    <string name="HistoricalPrice">Historical stock price for</string>
+    <string name="TwoYearsHistorical">2 years historical data for</string>
+    <string name="EachPointRespresentsAWeek">, stock each point represents one week</string>
+    <string name="CurrentPrice">Current Price:</string>
+    <string name="PercentageChange">Percentage Change:</string>
+    <string name="AbsoluteChange">Absolute Change:</string>
+    <string name="HistoricalDataFor">Historical data chart for</string>
+    <string name="Price">Price</string>
 
 </resources>
