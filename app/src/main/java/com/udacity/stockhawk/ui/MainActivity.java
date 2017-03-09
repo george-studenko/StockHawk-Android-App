@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 String message = getString(R.string.toast_stock_added_no_connectivity, symbol);
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
-            PrefUtils.addStock(this, symbol);
+            PrefUtils.addStock(this, symbol.toUpperCase());
             QuoteSyncJob.syncImmediately(this);
         }
     }
