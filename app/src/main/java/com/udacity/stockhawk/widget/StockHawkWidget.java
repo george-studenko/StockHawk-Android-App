@@ -17,6 +17,13 @@ import timber.log.Timber;
 
 public class StockHawkWidget extends AppWidgetProvider {
     @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        // TODO: Widget. Handle the broadcast and update the widget instances
+
+    }
+
+    @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
