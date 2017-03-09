@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private StockAdapter adapter;
     private static boolean mInvalidStockSymbol=false;
     private static String mInvalidStockSymbolValue;
+    private static final String ACTION_DATA_UPDATED = "com.udacity.stockhawk.ACTION_DATA_UPDATED";
+    Context context;
 
     @Override
     public void onClick(String symbol) {
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        context=getApplicationContext();
         if(networkUp()) {
             error.setVisibility(View.INVISIBLE);
             adapter = new StockAdapter(this, this);
@@ -89,7 +91,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     PrefUtils.removeStock(MainActivity.this, symbol);
                     getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
                     // TODO: Widget. send broadcast to update widgets
-
+                    Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+                    context.sendBroadcast(dataUpdatedIntent);
                 }
             }).attachToRecyclerView(stockRecyclerView);
 

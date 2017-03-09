@@ -2,12 +2,14 @@ package com.udacity.stockhawk.widget;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.widget.RemoteViews;
 
 import com.udacity.stockhawk.R;
+import com.udacity.stockhawk.sync.QuoteSyncJob;
 
 import timber.log.Timber;
 
@@ -18,9 +20,13 @@ import timber.log.Timber;
 public class StockHawkWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
         // TODO: Widget. Handle the broadcast and update the widget instances
-
+        if(intent.getAction().equalsIgnoreCase(QuoteSyncJob.ACTION_DATA_UPDATED)) {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName componentName = new ComponentName(context,StockHawkWidget.class);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetManager.getAppWidgetIds(componentName), R.id.widget_list);
+        }
+        super.onReceive(context, intent);
     }
 
     @Override
@@ -28,7 +34,8 @@ public class StockHawkWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
-        Timber.e("CALLING ON UPDATE HERE!");
+        ComponentName componentName = new ComponentName(context,StockHawkWidget.class);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetManager.getAppWidgetIds(componentName), R.id.widget_list);
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
@@ -36,7 +43,6 @@ public class StockHawkWidget extends AppWidgetProvider {
     public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                        int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-        Timber.e("SETTING REMOTE VIEW HERE!");
         // Set up the collection
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             views.setRemoteAdapter(R.id.widget_list,
