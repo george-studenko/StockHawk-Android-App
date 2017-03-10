@@ -19,7 +19,6 @@ import timber.log.Timber;
 
 public class StockHawkWidgetDataProvider implements RemoteViewsService.RemoteViewsFactory // ,LoaderManager.LoaderCallbacks<Cursor>
 {
-
     Context context;
     Intent intent;
     Cursor cursor;
@@ -31,21 +30,15 @@ public class StockHawkWidgetDataProvider implements RemoteViewsService.RemoteVie
 
     @Override
     public void onCreate() {
-        ContentResolver resolver = context.getContentResolver();
-        cursor = resolver.query( Contract.Quote.URI,
-                Contract.Quote.QUOTE_COLUMNS.toArray(new String[]{}),
-                null, null, Contract.Quote.COLUMN_SYMBOL);
-        Timber.e("FACTORY ON CREATE!");
+
     }
 
     @Override
     public void onDataSetChanged() {
-        Timber.e("DATASET CHANGED!");
-        if(cursor!=null){
-            Timber.e("CURSOR GOT DATA!");
-        }else{
-            Timber.e("CURSOR IS NULL.....");
-        }
+            ContentResolver resolver = context.getContentResolver();
+            cursor = resolver.query(Contract.Quote.URI,
+                    Contract.Quote.QUOTE_COLUMNS.toArray(new String[]{}),
+                    null, null, Contract.Quote.COLUMN_SYMBOL);
     }
 
     @Override
